@@ -42,14 +42,12 @@ function ISMOA
         objs = W.*estimator(W,X,Y);
         [~,index] = max(min(pdist2(objs,Obj),[],2));
         
-        % Evaluation
+        % Evaluation and upconvert
         dec = zeros(1,D);
         for i = 1 : D
             dec(i) = estimator(W(index,:),X,Dec(:,i));
         end
         dec = min(max(dec,0),1);
-        
-        % Upconvert
         Dec = [Dec;dec];
         Obj = [Obj;DTLZ2(dec,M)];
     end
